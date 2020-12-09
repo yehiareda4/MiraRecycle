@@ -21,12 +21,15 @@ Notice that MiraRecycleView is a project under development.
 #### Quick Setup (Basic Usage)
 ##### 1.Using Gradle:
 ```groovy
-repositories {
-    jcenter()
-    }
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 dependencies {
     ...
-
+    implementation 'com.github.yehiareda4:MiraRecycle:Tag'
 }
 ```
 
