@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.activity.SplashActivity">
+
+
+        <com.reda.yehia.mairrecycle.MiraVKRecycleView
+            android:id="@+id/mira_recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="172dp"
+            tools:layout_editor_absoluteY="262dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
