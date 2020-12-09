@@ -29,7 +29,7 @@ Notice that MiraRecycleView is a project under development.
 	}
 dependencies {
     ...
-    implementation 'com.github.yehiareda4:MiraRecycle:Tag'
+    implementation 'com.github.yehiareda4:MiraRecycle:1.0.0'
 }
 ```
 
