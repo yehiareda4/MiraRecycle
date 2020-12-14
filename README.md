@@ -32,6 +32,19 @@ dependencies {
     implementation 'com.github.yehiareda4:MiraRecycle:1.0.0'
 }
 ```
+```maven
+        <repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+	<dependency>
+	    <groupId>com.github.yehiareda4</groupId>
+	    <artifactId>MiraRecycle</artifactId>
+	    <version>1.0.0</version>
+	</dependency>
+```
 
 ##### 2.Usage:
 
