@@ -63,12 +63,12 @@ class MiraVKRecycleView : RelativeLayout {
             orientation
         )
         this.refreshing = refreshing
-        binding.miraRecycleViewSrlRefresh.setEnabled(refreshing)
+        binding.miraRecycleViewSrlRefresh.isEnabled = refreshing
         this.loadMore = loadMore
         setUpMiraRecycleView(manger)
         this.loadMore?.onInit()
 
-        enabledMiraShimmerLoading(VISIBLE)
+        enabledMiraShimmerLoading(GONE)
     }
 
     fun enabledMiraLoadMoreProgress(visibility: Int) {
@@ -156,7 +156,7 @@ class MiraVKRecycleView : RelativeLayout {
                     binding.miraRecycleViewSFlShimmer.addView(linearLayout)
                 }
             }
-            enabledMiraShimmerLoading(VISIBLE)
+//            enabledMiraShimmerLoading(VISIBLE)
         }
     }
 
