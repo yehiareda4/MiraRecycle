@@ -195,7 +195,7 @@ class MiraVKRecycleView : RelativeLayout {
                     }
                 } else {
                     onEndLess.current_page = onEndLess.previous_page
-                    enabledMiraNoLoadMoreData(VISIBLE)
+//                    enabledMiraNoLoadMoreData(VISIBLE)
                 }
             }
         }
