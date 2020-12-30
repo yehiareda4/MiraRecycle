@@ -144,7 +144,7 @@ class MiraVKRecycleView : RelativeLayout {
                     }
                 } else {
                     for (i in 1..countRowsShimmer) {
-                        val linearLayout = LinearLayout(getContext())
+                        val linearLayout = LinearLayout(context1)
                         linearLayout.orientation = LinearLayout.HORIZONTAL
                         linearLayout.layoutParams = LinearLayout.LayoutParams(
                             LayoutParams.MATCH_PARENT,

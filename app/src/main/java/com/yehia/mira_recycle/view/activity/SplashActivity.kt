@@ -23,6 +23,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
+        binding.miraRecycleViews.setBackgroundResource(R.color.black)
 
         binding.miraRecycleView.setUp(
             com.reda.yehia.mairrecycle.R.anim.layout_animation_from_scale, 600,
@@ -56,12 +57,13 @@ class SplashActivity : AppCompatActivity() {
                 }
             }
         )
-
+        binding.miraRecycleView.enabledMiraShimmerLoading(View.VISIBLE)
         setData()
     }
 
     private fun setData() {
         Handler(Looper.getMainLooper()).postDelayed({
+            binding.miraRecycleViews.setBackgroundResource(R.color.colorPrimary)
 
             addData(dataList)
             adapter.notifyDataSetChanged()
