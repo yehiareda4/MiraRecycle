@@ -31,7 +31,7 @@ open class BaseFragment : Fragment() {
 
     fun Boolean.showAlertDialog(message: String) {
         builder = AlertDialog.Builder(requireContext())
-        builder.setTitle(getString(R.string.please_wait))
+        builder.setTitle("")
         builder.setMessage(message)
         builder.setCancelable(this)
         builder.show()

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,7 @@ class SplashActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
 
         binding.miraRecycleView.setUp(
+            com.reda.yehia.mairrecycle.R.anim.layout_animation_from_scale, 600,
             R.layout.item_test, 5, 1,
             LinearLayoutManager(this), LinearLayout.VERTICAL, true, object : LoadMoreK() {
                 override fun onLoadMore(current_page: Int) {
@@ -45,6 +47,11 @@ class SplashActivity : AppCompatActivity() {
                 override fun onInit() {
                     dataList = ArrayList()
                     adapter = MiraRecyclerAdapter(this@SplashActivity, dataList)
+                    binding.miraRecycleView.binding.miraRecycleViewRvRecycler.layoutAnimation =
+                        AnimationUtils.loadLayoutAnimation(
+                            this@SplashActivity,
+                            com.reda.yehia.mairrecycle.R.anim.layout_animation_from_scale
+                        )
                     binding.miraRecycleView.setAdapter(adapter)
                 }
             }
@@ -58,6 +65,8 @@ class SplashActivity : AppCompatActivity() {
 
             addData(dataList)
             adapter.notifyDataSetChanged()
+
+            binding.miraRecycleView.scheduleLayoutAnimation();
             binding.miraRecycleView.maxPage = 4
             binding.miraRecycleView.resetProsses()
 
