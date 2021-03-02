@@ -105,18 +105,35 @@
                 android:layout_height="match_parent"
                 android:visibility="gone">
 
-                <pl.droidsonroids.gif.GifImageView
-                    android:id="@+id/mira_recycle_view_iv_error_image"
-                    android:layout_width="@dimen/_125sdp"
-                    android:layout_height="@dimen/_125sdp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/_60sdp" />
+                <RelativeLayout
+                    android:id="@+id/mira_recycle_view_rl_error_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/mira_recycle_view_iv_error_image"
+                        android:layout_width="@dimen/_125sdp"
+                        android:layout_height="@dimen/_125sdp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/_60sdp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/mira_recycle_view_iv_error_image_iv"
+                        android:layout_width="@dimen/_125sdp"
+                        android:layout_height="@dimen/_125sdp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/_60sdp" />
+
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/mira_recycle_view_tv_error_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/mira_recycle_view_iv_error_image"
+                    android:layout_below="@+id/mira_recycle_view_rl_error_image"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
                     android:gravity="center" />
 
                 <Button
@@ -125,6 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/mira_recycle_view_tv_error_text"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:background="@null" />
 
             </RelativeLayout>

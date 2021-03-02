@@ -103,7 +103,7 @@
                 android:id="@+id/mira_recycle_view_rl_error"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone">
+                android:visibility="">
 
                 <pl.droidsonroids.gif.GifImageView
                     android:id="@+id/mira_recycle_view_iv_error_image"
@@ -116,6 +116,7 @@
                     android:id="@+id/mira_recycle_view_tv_error_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:layout_centerInParent="true"
                     android:gravity="center" />
 
@@ -123,6 +124,7 @@
                     android:id="@+id/mira_recycle_view_btn_error_action"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:layout_below="@id/mira_recycle_view_tv_error_text"
                     android:layout_centerHorizontal="true"
                     android:background="@null" />

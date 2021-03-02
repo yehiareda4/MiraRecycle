@@ -13,10 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MiraVKRecycleView : RelativeLayout {
-
-    val GIF = "GIF"
-    val OTHER = "OTHER"
+class MiraVKV2RecycleView : RelativeLayout {
 
     var context1: Context
     lateinit var inflter: LayoutInflater
@@ -105,39 +102,10 @@ class MiraVKRecycleView : RelativeLayout {
     ) {
         binding.miraRecycleViewRlError.setVisibility(visibility)
         if (visibility == VISIBLE) {
-            setMiraErrorImageIv(errorImage)
+            setMiraErrorImage(errorImage)
             setMiraErrorText(errorText)
             setMiraErrorAction(actionText, listener)
         }
-    }
-
-    /*
-    *  type
-    *      => #GIF ==> Gif Image
-    *      => #OTHER ==> other Image
-    * */
-    fun enabledMiraError(
-        visibility: Int,
-        errorImage: Int,
-        errorText: String,
-        actionText: String,
-        listener: OnClickListener?,
-        type: String
-    ) {
-        binding.miraRecycleViewRlError.setVisibility(visibility)
-        if (visibility == VISIBLE) {
-            if (type == OTHER) {
-                setMiraErrorImageIv(errorImage)
-            } else {
-                setMiraErrorImage(errorImage)
-            }
-            setMiraErrorText(errorText)
-            setMiraErrorAction(actionText, listener)
-        }
-    }
-
-    private fun setMiraErrorImageIv(errorImage: Int) {
-        binding.miraRecycleViewIvErrorImageIv.setImageResource(errorImage)
     }
 
     private fun setMiraErrorImage(errorImage: Int) {
