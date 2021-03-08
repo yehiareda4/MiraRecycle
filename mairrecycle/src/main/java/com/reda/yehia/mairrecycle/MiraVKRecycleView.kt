@@ -137,7 +137,7 @@ class MiraVKRecycleView : RelativeLayout {
     }
 
     private fun setMiraErrorImageIv(errorImage: Int) {
-        binding.miraRecycleViewIvErrorImageIv.setImageResource(errorImage)
+        binding.miraRecycleViewIvErrorImageIv.setBackgroundResource(errorImage)
     }
 
     private fun setMiraErrorImage(errorImage: Int) {
