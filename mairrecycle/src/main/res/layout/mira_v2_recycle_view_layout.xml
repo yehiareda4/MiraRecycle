@@ -103,7 +103,7 @@
                 android:id="@+id/mira_recycle_view_rl_error"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="">
+                android:visibility="gone">
 
                 <pl.droidsonroids.gif.GifImageView
                     android:id="@+id/mira_recycle_view_iv_error_image"
