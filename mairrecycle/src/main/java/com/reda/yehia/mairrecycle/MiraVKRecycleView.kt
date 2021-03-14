@@ -29,6 +29,7 @@ class MiraVKRecycleView : RelativeLayout {
     var maxPage = 0
     var loadMore: LoadMoreK? = null
     private var refreshing = true
+    var top = false
 
     constructor(context: Context) : super(context) {
         this.context1 = context
@@ -80,15 +81,23 @@ class MiraVKRecycleView : RelativeLayout {
     }
 
     fun enabledMiraLoadMoreProgress(visibility: Int) {
-        binding.miraRecycleViewLlProgress.setVisibility(visibility)
+        if (top) {
+            binding.miraRecycleViewLlTopProgress.visibility = visibility
+        } else {
+            binding.miraRecycleViewLlProgress.visibility = visibility
+        }
     }
 
     fun enabledMiraNoLoadMoreData(visibility: Int) {
-        binding.miraRecycleViewLlNoMoreData.setVisibility(visibility)
+        if (top) {
+            binding.miraRecycleViewLlTopNoMoreData.visibility = visibility
+        } else {
+            binding.miraRecycleViewLlNoMoreData.visibility = visibility
+        }
     }
 
     fun enabledMiraShimmerLoading(visibility: Int) {
-        binding.miraRecycleViewLlLoading.setVisibility(visibility)
+        binding.miraRecycleViewLlLoading.visibility = visibility
         if (visibility == VISIBLE) {
             binding.miraRecycleViewSFlLoading.startShimmer()
         } else {
@@ -103,7 +112,7 @@ class MiraVKRecycleView : RelativeLayout {
         actionText: String,
         listener: OnClickListener?
     ) {
-        binding.miraRecycleViewRlError.setVisibility(visibility)
+        binding.miraRecycleViewRlError.visibility = visibility
         if (visibility == VISIBLE) {
             setMiraErrorImageIv(errorImage)
             setMiraErrorText(errorText)
@@ -124,7 +133,7 @@ class MiraVKRecycleView : RelativeLayout {
         listener: OnClickListener?,
         type: String
     ) {
-        binding.miraRecycleViewRlError.setVisibility(visibility)
+        binding.miraRecycleViewRlError.visibility = visibility
         if (visibility == VISIBLE) {
             if (type == OTHER) {
                 setMiraErrorImageIv(errorImage)
