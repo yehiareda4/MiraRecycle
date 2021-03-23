@@ -80,6 +80,28 @@ class MiraVKRecycleView : RelativeLayout {
         this.loadMore?.onInit()
     }
 
+    fun setUp(
+        shimmerLayout: Int,
+        manger: RecyclerView.LayoutManager,
+        refreshing: Boolean,
+        loadMore: LoadMoreK?
+    ) {
+        binding.miraRecycleViewSFlShimmer.removeAllViews()
+        val view = inflate(context1, shimmerLayout, null)
+        view.layoutParams = LinearLayout.LayoutParams(
+            LayoutParams.MATCH_PARENT,
+            LayoutParams.MATCH_PARENT,
+            1f
+        )
+        binding.miraRecycleViewSFlShimmer.addView(view)
+
+        this.refreshing = refreshing
+        binding.miraRecycleViewSrlRefresh.isEnabled = refreshing
+        this.loadMore = loadMore
+        setUpMiraRecycleView(manger)
+        this.loadMore?.onInit()
+    }
+
     fun enabledMiraLoadMoreProgress(visibility: Int) {
         if (top) {
             binding.miraRecycleViewLlTopProgress.visibility = visibility

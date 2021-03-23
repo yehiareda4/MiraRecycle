@@ -13,8 +13,7 @@
             <RelativeLayout
                 android:id="@+id/mira_recycle_view_rl_top_load_more"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:id="@+id/mira_recycle_view_ll_top_progress"
@@ -58,9 +57,9 @@
                 android:id="@+id/mira_recycle_view_rv_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@+id/mira_recycle_view_rl_top_load_more"
                 android:layout_above="@id/mira_recycle_view_rl_load_more"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true" />
+                android:layout_alignParentStart="true" />
 
             <RelativeLayout
                 android:id="@+id/mira_recycle_view_rl_load_more"
@@ -92,8 +91,8 @@
                     android:id="@+id/mira_recycle_view_ll_no_more_data"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    android:gravity="center">
 
                     <TextView
                         android:layout_width="wrap_content"
