@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/mira_recycle_view_srl_refresh"
@@ -57,8 +58,8 @@
                 android:id="@+id/mira_recycle_view_rv_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/mira_recycle_view_rl_top_load_more"
                 android:layout_above="@id/mira_recycle_view_rl_load_more"
+                android:layout_below="@+id/mira_recycle_view_rl_top_load_more"
                 android:layout_alignParentStart="true" />
 
             <RelativeLayout
@@ -91,8 +92,8 @@
                     android:id="@+id/mira_recycle_view_ll_no_more_data"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -151,7 +152,8 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true">
+                    android:layout_centerInParent="true"
+                    tools:ignore="UselessParent">
 
                     <RelativeLayout
                         android:id="@+id/mira_recycle_view_rl_error_image"
@@ -160,15 +162,23 @@
 
                         <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/mira_recycle_view_iv_error_image"
-                            android:layout_width="@dimen/_125sdp"
-                            android:layout_height="@dimen/_125sdp"
-                            android:layout_centerHorizontal="true" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:maxWidth="@dimen/_225sdp"
+                            android:maxHeight="@dimen/_225sdp"
+                            android:minWidth="@dimen/_125sdp"
+                            android:minHeight="@dimen/_125sdp" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/mira_recycle_view_iv_error_image_iv"
-                            android:layout_width="@dimen/_125sdp"
-                            android:layout_height="@dimen/_125sdp"
-                            android:layout_centerHorizontal="true" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:maxWidth="@dimen/_225sdp"
+                            android:maxHeight="@dimen/_225sdp"
+                            android:minWidth="@dimen/_125sdp"
+                            android:minHeight="@dimen/_125sdp" />
 
                     </RelativeLayout>
 
