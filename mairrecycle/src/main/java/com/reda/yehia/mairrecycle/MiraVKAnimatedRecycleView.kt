@@ -3,12 +3,13 @@ package com.reda.yehia.mairrecycle
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.reda.yehia.mairrecycle.databinding.MiraVkARecycleViewLayoutBinding
+import com.reda.yehia.mairrecycle.util.LoadMoreK
+import com.reda.yehia.mairrecycle.util.OnEndLessK
 
 class MiraVKAnimatedRecycleView : RelativeLayout {
 

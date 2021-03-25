@@ -1,4 +1,4 @@
-package com.reda.yehia.mairrecycle;
+package com.reda.yehia.mairrecycle.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -24,6 +24,8 @@ import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
+
+import com.reda.yehia.mairrecycle.R;
 
 @SuppressLint("AppCompatCustomView")
 public class RoundedImageView extends ImageView {

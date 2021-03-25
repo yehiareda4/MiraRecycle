@@ -3,11 +3,12 @@ package com.reda.yehia.mairrecycle
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.reda.yehia.mairrecycle.databinding.MiraVkRecycleViewLayoutBinding
+import com.reda.yehia.mairrecycle.databinding.MiraKv2RecycleViewLayoutBinding
 import com.reda.yehia.mairrecycle.util.LoadMoreK
 import com.reda.yehia.mairrecycle.util.OnEndLessK
 import kotlinx.coroutines.CoroutineScope
@@ -15,12 +16,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MiraVKV2RecycleView : RelativeLayout {
+class MiraKV2RecycleView : RelativeLayout {
+
+    val GIF = "GIF"
+    val OTHER = "OTHER"
 
     var context1: Context
     lateinit var inflter: LayoutInflater
     lateinit var onEndLess: OnEndLessK
-    lateinit var binding: MiraVkRecycleViewLayoutBinding
+    lateinit var binding: MiraKv2RecycleViewLayoutBinding
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -28,6 +32,7 @@ class MiraVKV2RecycleView : RelativeLayout {
     var maxPage = 0
     var loadMore: LoadMoreK? = null
     private var refreshing = true
+    var top = false
 
     constructor(context: Context) : super(context) {
         this.context1 = context
@@ -51,9 +56,9 @@ class MiraVKV2RecycleView : RelativeLayout {
     private fun initView() {
         inflter = LayoutInflater.from(context1)
         binding = DataBindingUtil.inflate(
-            inflter, R.layout.mira_vk_recycle_view_layout, this, false
+            inflter, R.layout.mira_kv2_recycle_view_layout, this, false
         )
-        addView(binding.getRoot())
+        addView(binding.root)
     }
 
     fun setUp(
@@ -78,16 +83,41 @@ class MiraVKV2RecycleView : RelativeLayout {
         this.loadMore?.onInit()
     }
 
+    fun setUp(
+        shimmerLayout: Int,
+        manger: RecyclerView.LayoutManager,
+        refreshing: Boolean,
+        loadMore: LoadMoreK?
+    ) {
+        binding.miraRecycleViewLlShimmer.removeAllViews()
+        val view = createView(shimmerLayout)
+        binding.miraRecycleViewLlShimmer.addView(view)
+
+        this.refreshing = refreshing
+        binding.miraRecycleViewSrlRefresh.isEnabled = refreshing
+        this.loadMore = loadMore
+        setUpMiraRecycleView(manger)
+        this.loadMore?.onInit()
+    }
+
     fun enabledMiraLoadMoreProgress(visibility: Int) {
-        binding.miraRecycleViewLlProgress.setVisibility(visibility)
+        if (top) {
+            binding.miraRecycleViewLlTopProgress.visibility = visibility
+        } else {
+            binding.miraRecycleViewLlProgress.visibility = visibility
+        }
     }
 
     fun enabledMiraNoLoadMoreData(visibility: Int) {
-        binding.miraRecycleViewLlNoMoreData.setVisibility(visibility)
+        if (top) {
+            binding.miraRecycleViewLlTopNoMoreData.visibility = visibility
+        } else {
+            binding.miraRecycleViewLlNoMoreData.visibility = visibility
+        }
     }
 
     fun enabledMiraShimmerLoading(visibility: Int) {
-        binding.miraRecycleViewLlLoading.setVisibility(visibility)
+        binding.miraRecycleViewLlLoading.visibility = visibility
         if (visibility == VISIBLE) {
             binding.miraRecycleViewSFlLoading.startShimmer()
         } else {
@@ -102,12 +132,41 @@ class MiraVKV2RecycleView : RelativeLayout {
         actionText: String,
         listener: OnClickListener?
     ) {
-        binding.miraRecycleViewRlError.setVisibility(visibility)
+        binding.miraRecycleViewRlError.visibility = visibility
         if (visibility == VISIBLE) {
-            setMiraErrorImage(errorImage)
+            setMiraErrorImageIv(errorImage)
             setMiraErrorText(errorText)
             setMiraErrorAction(actionText, listener)
         }
+    }
+
+    /*
+    *  type
+    *      => #GIF ==> Gif Image
+    *      => #OTHER ==> other Image
+    * */
+    fun enabledMiraError(
+        visibility: Int,
+        errorImage: Int,
+        errorText: String,
+        actionText: String,
+        listener: OnClickListener?,
+        type: String
+    ) {
+        binding.miraRecycleViewRlError.visibility = visibility
+        if (visibility == VISIBLE) {
+            if (type == OTHER) {
+                setMiraErrorImageIv(errorImage)
+            } else {
+                setMiraErrorImage(errorImage)
+            }
+            setMiraErrorText(errorText)
+            setMiraErrorAction(actionText, listener)
+        }
+    }
+
+    private fun setMiraErrorImageIv(errorImage: Int) {
+        binding.miraRecycleViewIvErrorImageIv.setBackgroundResource(errorImage)
     }
 
     private fun setMiraErrorImage(errorImage: Int) {
@@ -115,11 +174,11 @@ class MiraVKV2RecycleView : RelativeLayout {
     }
 
     private fun setMiraErrorText(errorText: String) {
-        binding.miraRecycleViewTvErrorText.setText(errorText)
+        binding.miraRecycleViewTvErrorText.text = (errorText)
     }
 
     private fun setMiraErrorAction(actionText: String, listener: OnClickListener?) {
-        binding.miraRecycleViewBtnErrorAction.setText(actionText)
+        binding.miraRecycleViewBtnErrorAction.text = (actionText)
         binding.miraRecycleViewBtnErrorAction.setOnClickListener(listener)
     }
 
@@ -130,44 +189,44 @@ class MiraVKV2RecycleView : RelativeLayout {
         orientation: Int
     ) {
         coroutineScope.launch {
-
             if (shimmerLayout != 0) {
-                binding.miraRecycleViewSFlShimmer.removeAllViews()
-                binding.miraRecycleViewSFlShimmerHorizontal.removeAllViews()
-                if (orientation == LinearLayout.HORIZONTAL) {
-                    for (j in 1..countColumnsShimmer) {
-                        val view = inflate(context1, shimmerLayout, null)
-                        view.layoutParams = LinearLayout.LayoutParams(
-                            LayoutParams.MATCH_PARENT,
-                            LayoutParams.MATCH_PARENT,
-                            1f
-                        )
-                        binding.miraRecycleViewSFlShimmerHorizontal.addView(view)
-                    }
+                binding.miraRecycleViewLlShimmer.removeAllViews()
+                if (countRowsShimmer == 1 && countColumnsShimmer == 1) {
+                    val view = createView(shimmerLayout)
+                    binding.miraRecycleViewLlShimmer.addView(view)
                 } else {
                     for (i in 1..countRowsShimmer) {
-                        val linearLayout = LinearLayout(context1)
-                        linearLayout.orientation = LinearLayout.HORIZONTAL
-                        linearLayout.layoutParams = LinearLayout.LayoutParams(
-                            LayoutParams.MATCH_PARENT,
-                            LayoutParams.WRAP_CONTENT,
-                            1f
-                        )
-                        for (j in 1..countColumnsShimmer) {
-                            val view = inflate(context1, shimmerLayout, null)
-                            view.layoutParams = LinearLayout.LayoutParams(
+                        if (countColumnsShimmer == 1) {
+                            val view = createView(shimmerLayout)
+                            binding.miraRecycleViewLlShimmer.addView(view)
+                        } else {
+                            val linearLayout = LinearLayout(context1)
+                            linearLayout.orientation = LinearLayout.HORIZONTAL
+                            linearLayout.layoutParams = LinearLayout.LayoutParams(
                                 LayoutParams.MATCH_PARENT,
                                 LayoutParams.WRAP_CONTENT,
                                 1f
                             )
-                            linearLayout.addView(view)
+                            for (j in 1..countColumnsShimmer) {
+                                val view = createView(shimmerLayout)
+                                linearLayout.addView(view)
+                            }
+                            binding.miraRecycleViewLlShimmer.addView(linearLayout)
                         }
-                        binding.miraRecycleViewSFlShimmer.addView(linearLayout)
                     }
                 }
             }
-
         }
+    }
+
+    private fun createView(shimmerLayout: Int): View {
+        val view = inflate(context1, shimmerLayout, null)
+        view.layoutParams = LinearLayout.LayoutParams(
+            LayoutParams.MATCH_PARENT,
+            LayoutParams.MATCH_PARENT,
+            1f
+        )
+        return view
     }
 
     private fun setUpMiraRecycleView(manger: RecyclerView.LayoutManager) {
@@ -177,13 +236,13 @@ class MiraVKV2RecycleView : RelativeLayout {
             reset()
             loadMore?.onReset()
             stopLoad(0)
-            binding.miraRecycleViewSrlRefresh.setRefreshing(true)
+            binding.miraRecycleViewSrlRefresh.isRefreshing = true
             enabledMiraShimmerLoading(VISIBLE)
             loadMore?.onRefresh()
         }
     }
 
-    fun reset() {
+    private fun reset() {
         onEndLess.previousTotal = 0
         onEndLess.current_page = 1
         onEndLess.previous_page = 1
@@ -196,8 +255,8 @@ class MiraVKV2RecycleView : RelativeLayout {
                 if (current_page <= maxPage) {
                     if (maxPage != 0 && current_page != 1) {
                         onEndLess.previous_page = current_page
+                        stopLoad(0)
                         enabledMiraLoadMoreProgress(VISIBLE)
-                        enabledMiraNoLoadMoreData(GONE)
                         loadMore?.onLoadMore(current_page)
                     } else {
                         enabledMiraShimmerLoading(GONE)
@@ -223,10 +282,10 @@ class MiraVKV2RecycleView : RelativeLayout {
                 enabledMiraNoLoadMoreData(VISIBLE)
             }
         }
-        resetProsses()
+        resetPresses()
     }
 
-    fun resetProsses() {
+    private fun resetPresses() {
         enabledMiraShimmerLoading(GONE)
         enabledMiraLoadMoreProgress(GONE)
         enabledMiraError(GONE, 0, "", "", null)

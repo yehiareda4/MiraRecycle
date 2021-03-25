@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.reda.yehia.mairrecycle.databinding.MiraV2RecycleViewLayoutBinding;
+import com.reda.yehia.mairrecycle.util.LoadMore;
+import com.reda.yehia.mairrecycle.util.OnEndLess;
 
 public class MiraVRecycleView extends RelativeLayout {
 

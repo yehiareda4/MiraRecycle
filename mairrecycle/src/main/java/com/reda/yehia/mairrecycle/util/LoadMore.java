@@ -1,4 +1,4 @@
-package com.reda.yehia.mairrecycle;
+package com.reda.yehia.mairrecycle.util;
 
 /*
  * Yehia Reda
