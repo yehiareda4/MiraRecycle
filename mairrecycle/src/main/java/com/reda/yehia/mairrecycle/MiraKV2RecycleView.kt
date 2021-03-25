@@ -78,6 +78,7 @@ class MiraKV2RecycleView : RelativeLayout {
         binding.miraRecycleViewSrlRefresh.isEnabled = refreshing
         this.loadMore = loadMore
         setUpMiraRecycleView(manger)
+        stopLoad(0)
         this.loadMore?.onInit()
     }
 
