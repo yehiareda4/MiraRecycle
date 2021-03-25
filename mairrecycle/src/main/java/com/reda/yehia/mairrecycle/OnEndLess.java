@@ -1,4 +1,4 @@
-package com.reda.yehia.mairrecycle.util;
+package com.reda.yehia.mairrecycle;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;

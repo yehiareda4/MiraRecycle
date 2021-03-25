@@ -1,4 +1,4 @@
-package com.reda.yehia.mairrecycle.util;
+package com.reda.yehia.mairrecycle;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

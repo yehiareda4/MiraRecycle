@@ -8,8 +8,6 @@ import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.reda.yehia.mairrecycle.databinding.MiraVkARecycleViewLayoutBinding
-import com.reda.yehia.mairrecycle.util.LoadMoreK
-import com.reda.yehia.mairrecycle.util.OnEndLessK
 
 class MiraVKAnimatedRecycleView : RelativeLayout {
 

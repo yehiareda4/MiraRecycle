@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.yehia.mira_recycle.R
 import com.yehia.mira_recycle.adapter.MiraRecyclerAdapter
 import com.yehia.mira_recycle.databinding.ActivitySplashBinding
-import com.reda.yehia.mairrecycle.util.LoadMoreK
+import com.reda.yehia.mairrecycle.LoadMoreK
 
 class SplashActivity : AppCompatActivity() {
 
