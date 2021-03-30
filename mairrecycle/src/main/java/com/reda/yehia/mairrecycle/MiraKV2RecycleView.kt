@@ -89,8 +89,10 @@ class MiraKV2RecycleView : RelativeLayout {
         loadMore: LoadMoreK?
     ) {
         binding.miraRecycleViewLlShimmer.removeAllViews()
-        val view = createView(shimmerLayout)
-        binding.miraRecycleViewLlShimmer.addView(view)
+        if (shimmerLayout != 0) {
+            val view = createView(shimmerLayout)
+            binding.miraRecycleViewLlShimmer.addView(view)
+        }
 
         this.refreshing = refreshing
         binding.miraRecycleViewSrlRefresh.isEnabled = refreshing
