@@ -69,21 +69,30 @@ class MiraRecycleViewV3 : RelativeLayout {
             R.styleable.MiraRecycleViewV3, defStyleAttr, 0
         )
 
-        val shimmerLayout = typedArray.getResourceId(R.styleable.MiraRecycleViewV3_shimmer_layout, 0)
+        val shimmerLayout =
+            typedArray.getResourceId(R.styleable.MiraRecycleViewV3_mira_shimmer_layout, 0)
         val countRowsShimmer =
-            typedArray.getInt(R.styleable.MiraRecycleViewV3_count_rows_shimmer, 0)
+            typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_count_rows_shimmer, 0)
         val countColumnsShimmer =
-            typedArray.getInt(R.styleable.MiraRecycleViewV3_count_columns_shimmer, 0)
-        val visibility = typedArray.getInt(R.styleable.MiraRecycleViewV3_visibility, View.GONE)
-        val refreshing = typedArray.getBoolean(R.styleable.MiraRecycleViewV3_refreshing, true)
-        val attrsEnabled = typedArray.getBoolean(R.styleable.MiraRecycleViewV3_attrs_enabled, false)
-
-        val errorImage =
-            typedArray.getInt(R.styleable.MiraRecycleViewV3_error_image, 0)
-        var errorText =
-            typedArray.getString(R.styleable.MiraRecycleViewV3_error_message)
-        var actionText =
-            typedArray.getString(R.styleable.MiraRecycleViewV3_error_title)
+            typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_count_columns_shimmer, 0)
+        var visibility = typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_visibility, View.GONE)
+        when (visibility) {
+            0 -> {
+                visibility = View.VISIBLE
+            }
+            1 -> {
+                visibility = View.INVISIBLE
+            }
+            2 -> {
+                visibility = View.GONE
+            }
+        }
+        val refreshing = typedArray.getBoolean(R.styleable.MiraRecycleViewV3_mira_refreshing, true)
+        val attrsEnabled =
+            typedArray.getBoolean(R.styleable.MiraRecycleViewV3_mira_attrs_enabled, false)
+        val errorImage = typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_error_image, 0)
+        var errorText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_message)
+        var actionText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_title)
 
         if (attrsEnabled) {
             if (shimmerLayout != 0) {
@@ -162,7 +171,7 @@ class MiraRecycleViewV3 : RelativeLayout {
     ) {
         this.loadMore = loadMore
         setUpMiraRecycleView(manger)
-        stopLoad(0)
+//        stopLoad(0)
         this.loadMore?.onInit()
     }
 
