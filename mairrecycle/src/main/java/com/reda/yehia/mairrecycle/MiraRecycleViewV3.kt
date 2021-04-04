@@ -69,7 +69,7 @@ class MiraRecycleViewV3 : RelativeLayout {
             R.styleable.MiraRecycleViewV3, defStyleAttr, 0
         )
 
-        val shimmerLayout = typedArray.getInt(R.styleable.MiraRecycleViewV3_shimmer_layout, 0)
+        val shimmerLayout = typedArray.getResourceId(R.styleable.MiraRecycleViewV3_shimmer_layout, 0)
         val countRowsShimmer =
             typedArray.getInt(R.styleable.MiraRecycleViewV3_count_rows_shimmer, 0)
         val countColumnsShimmer =
