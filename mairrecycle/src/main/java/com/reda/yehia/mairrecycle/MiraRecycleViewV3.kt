@@ -33,7 +33,11 @@ class MiraRecycleViewV3 : RelativeLayout {
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         this.context1 = context
-        initView()
+        initView(
+            context,
+            attrs,
+            0
+        )
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
@@ -76,16 +80,12 @@ class MiraRecycleViewV3 : RelativeLayout {
         val countColumnsShimmer =
             typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_count_columns_shimmer, 0)
         var visibility = typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_visibility, View.GONE)
-        when (visibility) {
-            0 -> {
-                visibility = View.VISIBLE
-            }
-            1 -> {
-                visibility = View.INVISIBLE
-            }
-            2 -> {
-                visibility = View.GONE
-            }
+        if (visibility == 0) {
+            visibility = View.VISIBLE
+        } else if (visibility == 1) {
+            visibility = View.INVISIBLE
+        } else if (visibility == 2) {
+            visibility = View.GONE
         }
         val refreshing = typedArray.getBoolean(R.styleable.MiraRecycleViewV3_mira_refreshing, true)
         val attrsEnabled =
