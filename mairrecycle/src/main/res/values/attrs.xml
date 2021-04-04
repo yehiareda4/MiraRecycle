@@ -44,6 +44,10 @@
         <attr name="mira_error_image" format="reference" />
         <attr name="mira_error_message" format="string" />
         <attr name="mira_error_title" format="string" />
+        <attr name="mira_error_image_type">
+            <enum name="OTHER" value="OTHER" />
+            <enum name="GIF" value="GIF" />
+        </attr>
 
         <attr name="mira_attrs_enabled" format="boolean" />
     </declare-styleable>

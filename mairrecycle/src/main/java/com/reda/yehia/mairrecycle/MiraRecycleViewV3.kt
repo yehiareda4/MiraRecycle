@@ -91,6 +91,8 @@ class MiraRecycleViewV3 : RelativeLayout {
         val attrsEnabled =
             typedArray.getBoolean(R.styleable.MiraRecycleViewV3_mira_attrs_enabled, false)
         val errorImage = typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_error_image, 0)
+        var errorImageType =
+            typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_image_type)
         var errorText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_message)
         var actionText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_title)
 
@@ -112,12 +114,16 @@ class MiraRecycleViewV3 : RelativeLayout {
             if (actionText.isNullOrEmpty()) {
                 actionText = ""
             }
+            if (errorImageType.isNullOrEmpty()) {
+                errorImageType = OTHER
+            }
             enabledMiraError(
                 GONE,
                 errorImage,
                 errorText,
                 actionText,
-                null
+                null,
+                errorImageType
             )
         }
 
@@ -242,6 +248,16 @@ class MiraRecycleViewV3 : RelativeLayout {
         }
     }
 
+    fun enabledMiraError(
+        visibility: Int,
+        listener: OnClickListener?
+    ) {
+        binding.miraRecycleViewLyError.miraRecycleViewRlError.visibility = visibility
+        if (visibility == VISIBLE) {
+            setMiraErrorAction("", listener)
+        }
+    }
+
     private fun setMiraErrorImageIv(errorImage: Int) {
         binding.miraRecycleViewLyError.miraRecycleViewIvErrorImageIv.setBackgroundResource(
             errorImage
@@ -257,7 +273,9 @@ class MiraRecycleViewV3 : RelativeLayout {
     }
 
     private fun setMiraErrorAction(actionText: String, listener: OnClickListener?) {
-        binding.miraRecycleViewLyError.miraRecycleViewBtnErrorAction.text = (actionText)
+        if (actionText != "") {
+            binding.miraRecycleViewLyError.miraRecycleViewBtnErrorAction.text = (actionText)
+        }
         binding.miraRecycleViewLyError.miraRecycleViewBtnErrorAction.setOnClickListener(listener)
     }
 
