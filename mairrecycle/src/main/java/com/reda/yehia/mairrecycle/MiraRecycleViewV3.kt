@@ -74,6 +74,7 @@ class MiraRecycleViewV3 : RelativeLayout {
             typedArray.getInt(R.styleable.MiraRecycleViewV3_count_rows_shimmer, 0)
         val countColumnsShimmer =
             typedArray.getInt(R.styleable.MiraRecycleViewV3_count_columns_shimmer, 0)
+        val visibility = typedArray.getInt(R.styleable.MiraRecycleViewV3_visibility, View.GONE)
         val refreshing = typedArray.getBoolean(R.styleable.MiraRecycleViewV3_refreshing, true)
         val attrsEnabled = typedArray.getBoolean(R.styleable.MiraRecycleViewV3_attrs_enabled, false)
 
@@ -85,11 +86,14 @@ class MiraRecycleViewV3 : RelativeLayout {
             typedArray.getString(R.styleable.MiraRecycleViewV3_error_title)
 
         if (attrsEnabled) {
-            setMiraRecycleViewSFlShimmer(
-                shimmerLayout,
-                countRowsShimmer,
-                countColumnsShimmer
-            )
+            if (shimmerLayout != 0) {
+                setMiraRecycleViewSFlShimmer(
+                    shimmerLayout,
+                    countRowsShimmer,
+                    countColumnsShimmer
+                )
+                enabledMiraShimmerLoading(visibility)
+            }
             this.refreshing = refreshing
             binding.miraRecycleViewSrlRefresh.isEnabled = refreshing
 

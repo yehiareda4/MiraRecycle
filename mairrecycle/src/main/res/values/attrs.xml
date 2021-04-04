@@ -28,6 +28,7 @@
     </declare-styleable>
 
     <declare-styleable name="MiraRecycleViewV3">
+        <attr name="visibility" format="integer" />
         <attr name="shimmer_layout" format="integer" />
         <attr name="count_rows_shimmer" format="integer" />
         <attr name="count_columns_shimmer" format="integer" />
