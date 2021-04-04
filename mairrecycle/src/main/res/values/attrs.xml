@@ -27,5 +27,17 @@
         <attr name="gridLayoutManagerColumns" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="MiraRecycleViewV3">
+        <attr name="shimmer_layout" format="integer" />
+        <attr name="count_rows_shimmer" format="integer" />
+        <attr name="count_columns_shimmer" format="integer" />
+        <attr name="refreshing" format="boolean" />
+
+        <attr name="error_image" format="integer" />
+        <attr name="error_message" format="string" />
+        <attr name="error_title" format="string" />
+
+        <attr name="attrs_enabled" format="boolean" />
+    </declare-styleable>
 
 </resources>
