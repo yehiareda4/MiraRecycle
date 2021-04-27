@@ -209,6 +209,12 @@ class MiraRecycleViewV3 : RelativeLayout {
     }
 
     fun enabledMiraError(
+        visibility: Int?
+    ) {
+        binding.miraRecycleViewLyError.miraRecycleViewRlError.visibility = visibility!!
+    }
+
+    fun enabledMiraError(
         visibility: Int,
         errorImage: Int,
         errorText: String,
