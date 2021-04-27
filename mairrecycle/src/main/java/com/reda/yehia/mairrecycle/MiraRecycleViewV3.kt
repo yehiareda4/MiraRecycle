@@ -394,7 +394,8 @@ class MiraRecycleViewV3 : RelativeLayout {
     private fun resetPresses() {
         enabledMiraShimmerLoading(GONE)
         enabledMiraLoadMoreProgress(GONE)
-        enabledMiraError(GONE, 0, "", "", null)
+        enabledMiraError(GONE, null)
+        maxPage = 0
         binding.miraRecycleViewSrlRefresh.isRefreshing = false
     }
 }
