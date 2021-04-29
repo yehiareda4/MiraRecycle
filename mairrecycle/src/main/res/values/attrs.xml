@@ -28,6 +28,7 @@
     </declare-styleable>
 
     <declare-styleable name="MiraRecycleViewV3">
+
         <attr name="mira_visibility">
             <!-- Visible on screen; the default value. -->
             <enum name="visible" value="0" />
@@ -50,6 +51,7 @@
         </attr>
 
         <attr name="mira_attrs_enabled" format="boolean" />
+
     </declare-styleable>
 
 </resources>
