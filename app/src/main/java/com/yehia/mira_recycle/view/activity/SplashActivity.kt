@@ -1,18 +1,18 @@
 package com.yehia.mira_recycle.view.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.reda.yehia.mairrecycle.LoadMoreK
 import com.yehia.mira_recycle.R
 import com.yehia.mira_recycle.adapter.MiraRecyclerAdapter
 import com.yehia.mira_recycle.databinding.ActivitySplashBinding
-import com.reda.yehia.mairrecycle.LoadMoreK
 
 class SplashActivity : AppCompatActivity() {
 
@@ -26,9 +26,8 @@ class SplashActivity : AppCompatActivity() {
         binding.miraRecycleViews.setBackgroundResource(R.color.black)
 
         binding.miraRecycleView.setUp(
-            com.reda.yehia.mairrecycle.R.anim.layout_animation_from_scale, 600,
-            R.layout.item_test, 5, 1,
-            LinearLayoutManager(this), LinearLayout.VERTICAL, true, object : LoadMoreK() {
+            LinearLayoutManager(this),
+            object : LoadMoreK() {
                 override fun onLoadMore(current_page: Int) {
                     if (current_page > 1) {
                         setData()
@@ -70,7 +69,6 @@ class SplashActivity : AppCompatActivity() {
 
             binding.miraRecycleView.scheduleLayoutAnimation();
             binding.miraRecycleView.maxPage = 4
-            binding.miraRecycleView.resetProsses()
 
         }, 5000)
     }

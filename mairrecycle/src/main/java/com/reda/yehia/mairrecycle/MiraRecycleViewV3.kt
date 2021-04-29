@@ -96,7 +96,7 @@ class MiraRecycleViewV3 : RelativeLayout {
             typedArray.getBoolean(R.styleable.MiraRecycleViewV3_mira_attrs_enabled, false)
         val errorImage = typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_error_image, 0)
         var errorImageType =
-            typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_image_type)
+            typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_error_image_type, 0)
         var errorText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_message)
         var actionText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_title)
 
@@ -118,16 +118,20 @@ class MiraRecycleViewV3 : RelativeLayout {
             if (actionText.isNullOrEmpty()) {
                 actionText = ""
             }
-            if (errorImageType.isNullOrEmpty()) {
-                errorImageType = OTHER
+            val errorImageTypeTxt: String
+            errorImageTypeTxt = if (errorImageType == 0) {
+                OTHER
+            } else {
+                GIF
             }
+
             enabledMiraError(
                 GONE,
                 errorImage,
                 errorText,
                 actionText,
                 null,
-                errorImageType
+                errorImageTypeTxt
             )
         }
 
