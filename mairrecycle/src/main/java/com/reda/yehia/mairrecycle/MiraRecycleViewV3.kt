@@ -13,6 +13,10 @@ import com.reda.yehia.mairrecycle.databinding.MiraRecycleViewV3LayoutBinding
 
 class MiraRecycleViewV3 : RelativeLayout {
 
+    private var errorImage: Int = 0
+    private var errorImageTypeTxt: String = ""
+    private var errorText: String = ""
+    private var actionText: String = ""
     val GIF = "GIF"
     val OTHER = "OTHER"
 
@@ -94,11 +98,11 @@ class MiraRecycleViewV3 : RelativeLayout {
         val refreshing = typedArray.getBoolean(R.styleable.MiraRecycleViewV3_mira_refreshing, true)
         val attrsEnabled =
             typedArray.getBoolean(R.styleable.MiraRecycleViewV3_mira_attrs_enabled, false)
-        val errorImage = typedArray.getResourceId(R.styleable.MiraRecycleViewV3_mira_error_image, 0)
+        errorImage = typedArray.getResourceId(R.styleable.MiraRecycleViewV3_mira_error_image, 0)
         val errorImageType =
             typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_error_image_type, 0)
-        var errorText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_message)
-        var actionText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_title)
+        errorText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_message)!!
+        actionText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_title)!!
 
         if (attrsEnabled) {
             if (shimmerLayout != 0) {
@@ -112,13 +116,12 @@ class MiraRecycleViewV3 : RelativeLayout {
             this.refreshing = refreshing
             binding.miraRecycleViewSrlRefresh.isEnabled = refreshing
 
-            if (errorText.isNullOrEmpty()) {
+            if (errorText.isEmpty()) {
                 errorText = ""
             }
-            if (actionText.isNullOrEmpty()) {
+            if (actionText.isEmpty()) {
                 actionText = ""
             }
-            val errorImageTypeTxt: String
             errorImageTypeTxt = if (errorImageType == 0) {
                 OTHER
             } else {
@@ -271,13 +274,14 @@ class MiraRecycleViewV3 : RelativeLayout {
         listener: OnClickListener?
     ) {
         binding.miraRecycleViewLyError.miraRecycleViewRlError.visibility = visibility
-        if (visibility == VISIBLE) {
-            if (listener==null) {
-                binding.miraRecycleViewLyError.miraRecycleViewBtnErrorAction.visibility = GONE
-            }else{
-                setMiraErrorAction("", listener)
-            }
-        }
+        enabledMiraError(
+            visibility,
+            errorImage,
+            errorText,
+            actionText,
+            listener,
+            errorImageTypeTxt
+        )
     }
 
     private fun setMiraErrorImageIv(errorImage: Int) {
