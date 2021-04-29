@@ -102,7 +102,9 @@ class MiraRecycleViewV3 : RelativeLayout {
         val errorImageType =
             typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_error_image_type, 0)
         errorText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_message)!!
-        actionText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_title)!!
+        if (typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_title) != null) {
+            actionText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_title)!!
+        }
 
         if (attrsEnabled) {
             if (shimmerLayout != 0) {
