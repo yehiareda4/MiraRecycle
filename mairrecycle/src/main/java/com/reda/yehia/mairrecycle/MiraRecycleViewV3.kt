@@ -94,8 +94,8 @@ class MiraRecycleViewV3 : RelativeLayout {
         val refreshing = typedArray.getBoolean(R.styleable.MiraRecycleViewV3_mira_refreshing, true)
         val attrsEnabled =
             typedArray.getBoolean(R.styleable.MiraRecycleViewV3_mira_attrs_enabled, false)
-        val errorImage = typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_error_image, 0)
-        var errorImageType =
+        val errorImage = typedArray.getResourceId(R.styleable.MiraRecycleViewV3_mira_error_image, 0)
+        val errorImageType =
             typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_error_image_type, 0)
         var errorText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_message)
         var actionText = typedArray.getString(R.styleable.MiraRecycleViewV3_mira_error_title)
@@ -272,7 +272,11 @@ class MiraRecycleViewV3 : RelativeLayout {
     ) {
         binding.miraRecycleViewLyError.miraRecycleViewRlError.visibility = visibility
         if (visibility == VISIBLE) {
-            setMiraErrorAction("", listener)
+            if (listener==null) {
+                binding.miraRecycleViewLyError.miraRecycleViewBtnErrorAction.visibility = GONE
+            }else{
+                setMiraErrorAction("", listener)
+            }
         }
     }
 
@@ -291,6 +295,7 @@ class MiraRecycleViewV3 : RelativeLayout {
     }
 
     private fun setMiraErrorAction(actionText: String, listener: OnClickListener?) {
+        binding.miraRecycleViewLyError.miraRecycleViewBtnErrorAction.visibility = VISIBLE
         if (actionText != "") {
             binding.miraRecycleViewLyError.miraRecycleViewBtnErrorAction.text = (actionText)
         }
