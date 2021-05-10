@@ -2,6 +2,8 @@ package com.reda.yehia.mairrecycle
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -314,30 +316,36 @@ class MiraRecycleViewV3 : RelativeLayout {
         countColumnsShimmer: Int,
     ) {
         if (shimmerLayout != 0) {
-            binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.removeAllViews()
-            if (countRowsShimmer == 1 && countColumnsShimmer == 1) {
-                val view = createView(shimmerLayout)
-                binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.addView(view)
-            } else {
-                for (i in 1..countRowsShimmer) {
-                    if (countColumnsShimmer == 1) {
+            val mainHandler = Handler(Looper.getMainLooper())
+            mainHandler.post {
+                if (binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.childCount == 0) {
+                    if (countRowsShimmer == 1 && countColumnsShimmer == 1) {
                         val view = createView(shimmerLayout)
                         binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.addView(view)
                     } else {
-                        val linearLayout = LinearLayout(context1)
-                        linearLayout.orientation = LinearLayout.HORIZONTAL
-                        linearLayout.layoutParams = LinearLayout.LayoutParams(
-                            LayoutParams.MATCH_PARENT,
-                            LayoutParams.WRAP_CONTENT,
-                            1f
-                        )
-                        for (j in 1..countColumnsShimmer) {
-                            val view = createView(shimmerLayout)
-                            linearLayout.addView(view)
+                        for (i in 1..countRowsShimmer) {
+                            if (countColumnsShimmer == 1) {
+                                val view = createView(shimmerLayout)
+                                binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.addView(
+                                    view
+                                )
+                            } else {
+                                val linearLayout = LinearLayout(context1)
+                                linearLayout.orientation = LinearLayout.HORIZONTAL
+                                linearLayout.layoutParams = LinearLayout.LayoutParams(
+                                    LayoutParams.MATCH_PARENT,
+                                    LayoutParams.WRAP_CONTENT,
+                                    1f
+                                )
+                                for (j in 1..countColumnsShimmer) {
+                                    val view = createView(shimmerLayout)
+                                    linearLayout.addView(view)
+                                }
+                                binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.addView(
+                                    linearLayout
+                                )
+                            }
                         }
-                        binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.addView(
-                            linearLayout
-                        )
                     }
                 }
             }

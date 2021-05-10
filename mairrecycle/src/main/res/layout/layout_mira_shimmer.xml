@@ -11,8 +11,6 @@
             android:id="@+id/mira_recycle_view_ll_shimmer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
             android:orientation="vertical" />
 
     </com.facebook.shimmer.ShimmerFrameLayout>
