@@ -321,14 +321,16 @@ class MiraRecycleViewV3 : RelativeLayout {
                 if (binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.childCount == 0) {
                     if (countRowsShimmer == 1 && countColumnsShimmer == 1) {
                         val view = createView(shimmerLayout)
-                        binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.addView(view)
+                        binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.apply {
+                            addView(view)
+                        }
                     } else {
                         for (i in 1..countRowsShimmer) {
                             if (countColumnsShimmer == 1) {
                                 val view = createView(shimmerLayout)
-                                binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.addView(
-                                    view
-                                )
+                                binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.apply {
+                                    addView(view)
+                                }
                             } else {
                                 val linearLayout = LinearLayout(context1)
                                 linearLayout.orientation = LinearLayout.HORIZONTAL
@@ -341,9 +343,9 @@ class MiraRecycleViewV3 : RelativeLayout {
                                     val view = createView(shimmerLayout)
                                     linearLayout.addView(view)
                                 }
-                                binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.addView(
-                                    linearLayout
-                                )
+                                binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.apply {
+                                    addView(linearLayout)
+                                }
                             }
                         }
                     }
