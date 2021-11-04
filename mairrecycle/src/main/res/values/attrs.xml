@@ -52,4 +52,26 @@
         <attr name="mira_attrs_enabled" format="boolean" />
     </declare-styleable>
 
+<!--    <declare-styleable name="MiraRecycleViewV3_1">-->
+<!--        <attr name="mira_attrs_enabled" format="boolean" />-->
+<!--        <attr name="mira_visibility" format="integer">-->
+<!--            &lt;!&ndash; Visible on screen; the default value. &ndash;&gt;-->
+<!--            <enum name="visible" value="0" />-->
+<!--            &lt;!&ndash; Not displayed, but taken into account during layout (space is left for it). &ndash;&gt;-->
+<!--            <enum name="invisible" value="1" />-->
+<!--            &lt;!&ndash; Completely hidden, as if the view had not been added. &ndash;&gt;-->
+<!--            <enum name="gone" value="2" />-->
+<!--        </attr>-->
+<!--        <attr name="mira_shimmer_layout" format="reference" />-->
+<!--        <attr name="mira_refreshing" format="boolean" />-->
+
+<!--        <attr name="mira_error_image" format="reference" />-->
+<!--        <attr name="mira_error_message" format="string" />-->
+<!--        <attr name="mira_error_title" format="string" />-->
+<!--        <attr name="mira_error_image_type" format="integer">-->
+<!--            <enum name="OTHER" value="0" />-->
+<!--            <enum name="GIF" value="1" />-->
+<!--        </attr>-->
+<!--    </declare-styleable>-->
+
 </resources>

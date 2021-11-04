@@ -9,19 +9,17 @@
         android:layout_height="match_parent"
         tools:context=".view.activity.SplashActivity">
 
-        <com.reda.yehia.mairrecycle.MiraRecycleViewV3
+        <com.reda.yehia.mairrecycle.MiraRecycleViewV301
             android:id="@+id/mira_recycle_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:mira_attrs_enabled="true"
-            app:mira_count_columns_shimmer="1"
-            app:mira_count_rows_shimmer="6"
             app:mira_error_image="@drawable/ic_logo"
             app:mira_error_image_type="OTHER"
             app:mira_error_message="sklhdfg/ldfkhlk"
             app:mira_error_title="dsfdjlskghfj"
             app:mira_refreshing="true"
-            app:mira_shimmer_layout="@layout/item_test"
+            app:mira_shimmer_layout="@drawable/ic_logo"
             app:mira_visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
