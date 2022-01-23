@@ -63,7 +63,7 @@ class SplashActivity : AppCompatActivity() {
     private fun setData() {
         Handler(Looper.getMainLooper()).postDelayed({
             binding.miraRecycleViews.setBackgroundResource(R.color.colorPrimary)
-
+            binding.miraRecycleView.stopLoad(0)
             addData(dataList)
             adapter.notifyDataSetChanged()
 

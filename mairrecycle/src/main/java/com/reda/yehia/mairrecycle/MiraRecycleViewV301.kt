@@ -2,18 +2,15 @@ package com.reda.yehia.mairrecycle
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.reda.yehia.mairrecycle.databinding.MiraRecycleViewV3LayoutBinding
+import com.reda.yehia.mairrecycle.databinding.MiraRecycleViewV31LayoutBinding
 
-class MiraRecycleViewV3 : RelativeLayout {
+class MiraRecycleViewV301 : RelativeLayout {
 
     private var errorImage: Int = 0
     private var errorImageTypeTxt: String = ""
@@ -25,7 +22,7 @@ class MiraRecycleViewV3 : RelativeLayout {
     var context1: Context
     lateinit var inflter: LayoutInflater
     lateinit var onEndLess: OnEndLessK
-    lateinit var binding: MiraRecycleViewV3LayoutBinding
+    lateinit var binding: MiraRecycleViewV31LayoutBinding
 
     var maxPage = 0
     var loadMore: LoadMoreK? = null
@@ -62,17 +59,19 @@ class MiraRecycleViewV3 : RelativeLayout {
     private fun initView() {
         inflter = LayoutInflater.from(context1)
         binding = DataBindingUtil.inflate(
-            inflter, R.layout.mira_recycle_view_v3_layout, this, false
+            inflter, R.layout.mira_recycle_view_v3_1_layout, this, false
         )
         addView(binding.root)
     }
 
-    @SuppressLint("Recycle")
+    @SuppressLint("Recycle", "CustomViewStyleable")
     private fun initView(context: Context, attrs: AttributeSet, defStyleAttr: Int) {
         inflter = LayoutInflater.from(context1)
         binding = DataBindingUtil.inflate(
-            inflter, R.layout.mira_recycle_view_v3_layout, this, false
+            inflter, R.layout.mira_recycle_view_v3_1_layout, this, false
         )
+
+        addView(binding.root)
 
         val typedArray = context.obtainStyledAttributes(
             attrs,
@@ -81,11 +80,8 @@ class MiraRecycleViewV3 : RelativeLayout {
 
         val shimmerLayout =
             typedArray.getResourceId(R.styleable.MiraRecycleViewV3_mira_shimmer_layout, 0)
-        val countRowsShimmer =
-            typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_count_rows_shimmer, 0)
-        val countColumnsShimmer =
-            typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_count_columns_shimmer, 0)
-        var visibility = typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_visibility, View.GONE)
+        var visibility =
+            typedArray.getInt(R.styleable.MiraRecycleViewV3_mira_visibility, View.VISIBLE)
         when (visibility) {
             0 -> {
                 visibility = View.VISIBLE
@@ -97,7 +93,8 @@ class MiraRecycleViewV3 : RelativeLayout {
                 visibility = View.GONE
             }
         }
-        val refreshing = typedArray.getBoolean(R.styleable.MiraRecycleViewV3_mira_refreshing, true)
+        val refreshing =
+            typedArray.getBoolean(R.styleable.MiraRecycleViewV3_mira_refreshing, true)
         val attrsEnabled =
             typedArray.getBoolean(R.styleable.MiraRecycleViewV3_mira_attrs_enabled, false)
         errorImage = typedArray.getResourceId(R.styleable.MiraRecycleViewV3_mira_error_image, 0)
@@ -111,9 +108,7 @@ class MiraRecycleViewV3 : RelativeLayout {
         if (attrsEnabled) {
             if (shimmerLayout != 0) {
                 setMiraRecycleViewSFlShimmer(
-                    shimmerLayout,
-                    countRowsShimmer,
-                    countColumnsShimmer
+                    shimmerLayout
                 )
                 enabledMiraShimmerLoading(visibility)
             }
@@ -141,43 +136,18 @@ class MiraRecycleViewV3 : RelativeLayout {
                 errorImageTypeTxt
             )
         }
-
-        addView(binding.root)
     }
-
 
     fun setUp(
         shimmerLayout: Int,
-        countRowsShimmer: Int,
-        countColumnsShimmer: Int,
         manger: RecyclerView.LayoutManager,
         refreshing: Boolean,
         loadMore: LoadMoreK?
     ) {
         setMiraRecycleViewSFlShimmer(
-            shimmerLayout,
-            countRowsShimmer,
-            countColumnsShimmer
+            shimmerLayout
         )
-        this.refreshing = refreshing
-        binding.miraRecycleViewSrlRefresh.isEnabled = refreshing
-        this.loadMore = loadMore
-        setUpMiraRecycleView(manger)
-        stopLoad(0)
-        this.loadMore?.onInit()
-    }
-
-    fun setUp(
-        shimmerLayout: Int,
-        manger: RecyclerView.LayoutManager,
-        refreshing: Boolean,
-        loadMore: LoadMoreK?
-    ) {
-        if (shimmerLayout != 0) {
-            binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.removeAllViews()
-            val view = createView(shimmerLayout)
-            binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.addView(view)
-        }
+        enabledMiraShimmerLoading(visibility)
 
         this.refreshing = refreshing
         binding.miraRecycleViewSrlRefresh.isEnabled = refreshing
@@ -192,7 +162,6 @@ class MiraRecycleViewV3 : RelativeLayout {
     ) {
         this.loadMore = loadMore
         setUpMiraRecycleView(manger)
-//        stopLoad(0)
         this.loadMore?.onInit()
     }
 
@@ -205,7 +174,7 @@ class MiraRecycleViewV3 : RelativeLayout {
         }
     }
 
-    fun enabledMiraNoLoadMoreData(visibility: Int) {
+    private fun enabledMiraNoLoadMoreData(visibility: Int) {
         if (top) {
             binding.miraRecycleViewLyTopProgress.miraRecycleViewLlNoMoreData.visibility = visibility
         } else {
@@ -312,56 +281,10 @@ class MiraRecycleViewV3 : RelativeLayout {
 
     private fun setMiraRecycleViewSFlShimmer(
         shimmerLayout: Int,
-        countRowsShimmer: Int,
-        countColumnsShimmer: Int,
     ) {
         if (shimmerLayout != 0) {
-            val mainHandler = Handler(Looper.getMainLooper())
-            mainHandler.post {
-                if (binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.childCount == 0) {
-                    if (countRowsShimmer == 1 && countColumnsShimmer == 1) {
-                        val view = createView(shimmerLayout)
-                        binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.apply {
-                            addView(view)
-                        }
-                    } else {
-                        for (i in 1..countRowsShimmer) {
-                            if (countColumnsShimmer == 1) {
-                                val view = createView(shimmerLayout)
-                                binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.apply {
-                                    addView(view)
-                                }
-                            } else {
-                                val linearLayout = LinearLayout(context1)
-                                linearLayout.orientation = LinearLayout.HORIZONTAL
-                                linearLayout.layoutParams = LinearLayout.LayoutParams(
-                                    LayoutParams.MATCH_PARENT,
-                                    LayoutParams.WRAP_CONTENT,
-                                    1f
-                                )
-                                for (j in 1..countColumnsShimmer) {
-                                    val view = createView(shimmerLayout)
-                                    linearLayout.addView(view)
-                                }
-                                binding.miraRecycleViewLyShimmer.miraRecycleViewLlShimmer.apply {
-                                    addView(linearLayout)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            binding.miraRecycleViewLyShimmer.miraRecycleViewTvShimmer.setImageResource(shimmerLayout)
         }
-    }
-
-    private fun createView(shimmerLayout: Int): View {
-        val view = inflate(context1, shimmerLayout, null)
-        view.layoutParams = LinearLayout.LayoutParams(
-            LayoutParams.MATCH_PARENT,
-            LayoutParams.MATCH_PARENT,
-            1f
-        )
-        return view
     }
 
     private fun setUpMiraRecycleView(manger: RecyclerView.LayoutManager) {
