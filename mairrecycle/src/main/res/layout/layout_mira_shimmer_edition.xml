@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mira_recycle_view_s_fl_loading"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/mira_recycle_view_s_fl_loading"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/mira_recycle_view_tv_shimmer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:orientation="vertical"
+        android:scaleType="fitXY" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/mira_recycle_view_tv_shimmer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:scaleType="fitXY" />
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
-</layout>
+</com.facebook.shimmer.ShimmerFrameLayout>

@@ -5,8 +5,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.RelativeLayout
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.reda.yehia.mairrecycle.databinding.MiraRecycleViewV31LayoutBinding
 
@@ -37,7 +37,6 @@ class MiraRecycleViewV301 : RelativeLayout {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         this.context1 = context
         initView(
-            context,
             attrs,
             0
         )
@@ -50,7 +49,6 @@ class MiraRecycleViewV301 : RelativeLayout {
     ) {
         this.context1 = context
         initView(
-            context,
             attrs,
             defStyleAttr
         )
@@ -58,20 +56,24 @@ class MiraRecycleViewV301 : RelativeLayout {
 
     private fun initView() {
         inflter = LayoutInflater.from(context1)
-        binding = DataBindingUtil.inflate(
-            inflter, R.layout.mira_recycle_view_v3_1_layout, this, false
-        )
+        if (!::binding.isInitialized) {
+            binding = MiraRecycleViewV31LayoutBinding.inflate(inflter, parent as ViewGroup?, false)
+        }
         addView(binding.root)
     }
 
     @SuppressLint("Recycle", "CustomViewStyleable")
-    private fun initView(context: Context, attrs: AttributeSet, defStyleAttr: Int) {
+    private fun initView(attrs: AttributeSet, defStyleAttr: Int) {
         inflter = LayoutInflater.from(context1)
-        binding = DataBindingUtil.inflate(
-            inflter, R.layout.mira_recycle_view_v3_1_layout, this, false
-        )
-
+        if (!::binding.isInitialized) {
+            binding = MiraRecycleViewV31LayoutBinding.inflate(inflter, parent as ViewGroup?, false)
+            setAttributes(attrs, defStyleAttr)
+        }
         addView(binding.root)
+    }
+
+    @SuppressLint("Recycle", "CustomViewStyleable")
+    private fun setAttributes(attrs: AttributeSet, defStyleAttr: Int) {
 
         val typedArray = context.obtainStyledAttributes(
             attrs,

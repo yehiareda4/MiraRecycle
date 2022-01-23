@@ -20,6 +20,10 @@ android {
         }
     }
 
+    viewBinding {
+        //noinspection DataBindingWithoutKapt
+        enabled = true
+    }
     dataBinding {
         //noinspection DataBindingWithoutKapt
         enabled = true
